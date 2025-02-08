@@ -106,24 +106,16 @@ const impulses = [
     {
         text: "Stell dir vor, du fühlst dich von der aktuellen Begeisterung rund um Künstliche Intelligenz (KI) mitgerissen und suchst nach einer pädagogischen Orientierung. Der Blogbeitrag 'Pädagogische Orientierung im KI-Hype' bietet dazu wertvolle Impulse. Er reflektiert kritisch den eigenen Umgang mit dem KI-Hype und formuliert fünf Leitlinien für die pädagogische Praxis: von der Entmystifizierung des Begriffs \"KI\" über die Betonung menschlicher Klugheit gegenüber menschenähnlichen Maschinen bis hin zur Anerkennung der menschengemachten Natur von Technologie. Besonders spannend ist die Erkenntnis, dass es wichtig ist, den Begriff \"KI\" präzise zu verwenden und die dahinterstehenden menschlichen Interessen und Gestaltungen zu hinterfragen. Lass dich von diesen Gedanken anregen und finde deinen eigenen reflektierten Weg im Umgang mit KI in der Bildung!",
         url: "https://ebildungslabor.de/blog/paedagogische-orientierung-im-ki-hype/"
-    },
-    {
-        text: "Stell dir vor, du fühlst dich von der aktuellen Begeisterung rund um Künstliche Intelligenz (KI) mitgerissen und suchst nach einer pädagogischen Orientierung. Der Blogbeitrag 'Pädagogische Orientierung im KI-Hype' bietet dazu wertvolle Impulse. Er reflektiert kritisch den eigenen Umgang mit dem KI-Hype und formuliert fünf Leitlinien für die pädagogische Praxis: von der Entmystifizierung des Begriffs \"KI\" über die Betonung menschlicher Klugheit gegenüber menschenähnlichen Maschinen bis hin zur Anerkennung der menschengemachten Natur von Technologie. Besonders spannend ist die Erkenntnis, dass es wichtig ist, den Begriff \"KI\" präzise zu verwenden und die dahinterstehenden menschlichen Interessen und Gestaltungen zu hinterfragen. Lass dich von diesen Gedanken anregen und finde deinen eigenen reflektierten Weg im Umgang mit KI in der Bildung!",
-        url: "https://ebildungslabor.de/blog/paedagogische-orientierung-im-ki-hype/"
     }
 ];
-let currentImpulseIndex = 0; // Start bei 0
-
-// Funktion zur Auswahl des nächsten Impulses in der Reihenfolge
-function getNextImpulse() {
-    const impulse = impulses[currentImpulseIndex];
-    currentImpulseIndex = (currentImpulseIndex + 1) % impulses.length; // Zum Anfang springen, wenn am Ende
-    return impulse;
+// Funktion zur Auswahl eines zufälligen Impulses
+function getRandomImpulse() {
+    return impulses[Math.floor(Math.random() * impulses.length)];
 }
 
 // Funktion zum Aktualisieren des Impuls-Textes
 function updateImpulse() {
-    const impulse = getNextImpulse();
+    const impulse = getRandomImpulse();
     
     const impulseTextElement = document.getElementById("impulseText");
     const readMoreButton = document.getElementById("readMoreButton");
@@ -141,7 +133,7 @@ function updateImpulse() {
 
 // Sobald die Seite geladen ist, initialisiere die Event Listener
 document.addEventListener("DOMContentLoaded", function () {
-    updateImpulse(); // Zeigt den ersten Impuls an
+    updateImpulse();
 
     const nextImpulseButton = document.getElementById("nextImpulseButton");
     if (nextImpulseButton) {
@@ -150,4 +142,5 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Element mit ID 'nextImpulseButton' wurde nicht gefunden.");
     }
 });
+
 
