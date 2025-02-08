@@ -148,13 +148,22 @@ function getRandomImpulse() {
 
 function updateImpulse() {
     const impulse = getRandomImpulse();
-    document.getElementById("impulseText").textContent = impulse.text;
-    document.getElementById("readMoreButton").onclick = function() {
-        window.location.href = impulse.url;
-    };
+    const impulseTextElement = document.getElementById("impulseText");
+    const readMoreButton = document.getElementById("readMoreButton");
+
+    if (impulseTextElement && readMoreButton) {
+        impulseTextElement.textContent = impulse.text;
+        readMoreButton.onclick = function() {
+            window.location.href = impulse.url;
+        };
+    }
 }
 
-document.getElementById("readMoreButton").addEventListener("click", updateImpulse);
-document.getElementById("nextImpulseButton").addEventListener("click", updateImpulse);
+document.addEventListener("DOMContentLoaded", function() {
+    updateImpulse();
 
-window.onload = updateImpulse;
+    const nextImpulseButton = document.getElementById("nextImpulseButton");
+    if (nextImpulseButton) {
+        nextImpulseButton.addEventListener("click", updateImpulse);
+    }
+});
