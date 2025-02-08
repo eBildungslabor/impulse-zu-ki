@@ -100,12 +100,12 @@ const impulses = [
 
 
          {
-        text: "Stell dir vor, du möchtest Künstliche Intelligenz (KI) nicht nur als neues Werkzeug im Unterricht einsetzen, sondern die Lernkultur grundlegend verändern. Der Blogbeitrag 'Wie wir mit KI-Eduhacking eine Veränderung der Lernkultur voranbringen können' stellt das Konzept des KI-Eduhackings vor. Dabei wird KI bewusst genutzt, um traditionelle Bildungsstrukturen zu "hacken" und Lernende zu mehr Selbstbestimmung zu ermächtigen. Besonders spannend ist die Idee, Prüfungen neu zu denken, indem man von standardisierten Tests zu offenen Reflexionsformaten übergeht, die kritisches Denken fördern. Lass dich von diesen Ansätzen inspirieren und entdecke, wie du mit KI-Eduhacking eine transformative Lernumgebung schaffen kannst!",
+        text: "Stell dir vor, du möchtest Künstliche Intelligenz (KI) nicht nur als neues Werkzeug im Unterricht einsetzen, sondern die Lernkultur grundlegend verändern. Der Blogbeitrag 'Wie wir mit KI-Eduhacking eine Veränderung der Lernkultur voranbringen können' stellt das Konzept des KI-Eduhackings vor. Dabei wird KI bewusst genutzt, um traditionelle Bildungsstrukturen zu 'hacken' und Lernende zu mehr Selbstbestimmung zu ermächtigen. Besonders spannend ist die Idee, Prüfungen neu zu denken, indem man von standardisierten Tests zu offenen Reflexionsformaten übergeht, die kritisches Denken fördern. Lass dich von diesen Ansätzen inspirieren und entdecke, wie du mit KI-Eduhacking eine transformative Lernumgebung schaffen kannst!",
         url: "https://ebildungslabor.de/blog/wie-wir-mit-ki-eduhacking-eine-veraenderung-der-lernkultur-voranbringen-koennen/"
     },
 
          {
-        text: "Stell dir vor, du möchtest deine Schüler*innen dazu befähigen, in einer von Künstlicher Intelligenz (KI) geprägten Welt eigenständig und kritisch zu denken. Der Blogbeitrag 'Die Kompetenz des kritischen Denkens – analysiert vor dem Hintergrund der KI-Debatte in der Bildung' bietet dazu wertvolle Einblicke. Er erläutert, dass kritisches Denken nicht nur bedeutet, Dinge zu hinterfragen, sondern auch, Wissen aktiv zu prüfen und eigene Überzeugungen zu entwickeln. Besonders spannend ist die Erkenntnis, dass kritisches Denken sowohl Kenntnisse über Denkprozesse als auch die Fähigkeit zur praktischen Anwendung und die Bereitschaft zur Selbstreflexion erfordert. Lass dich von diesen Gedanken inspirieren und fördere das kritische Denken deiner Schüler*innen, um sie auf die Herausforderungen der digitalen Welt vorzubereiten!"
+        text: "Stell dir vor, du möchtest deine Schüler*innen dazu befähigen, in einer von Künstlicher Intelligenz (KI) geprägten Welt eigenständig und kritisch zu denken. Der Blogbeitrag 'Die Kompetenz des kritischen Denkens – analysiert vor dem Hintergrund der KI-Debatte in der Bildung' bietet dazu wertvolle Einblicke. Er erläutert, dass kritisches Denken nicht nur bedeutet, Dinge zu hinterfragen, sondern auch, Wissen aktiv zu prüfen und eigene Überzeugungen zu entwickeln. Besonders spannend ist die Erkenntnis, dass kritisches Denken sowohl Kenntnisse über Denkprozesse als auch die Fähigkeit zur praktischen Anwendung und die Bereitschaft zur Selbstreflexion erfordert. Lass dich von diesen Gedanken inspirieren und fördere das kritische Denken deiner Schüler*innen, um sie auf die Herausforderungen der digitalen Welt vorzubereiten!",
                    url: "https://ebildungslabor.de/blog/die-kompetenz-des-kritischen-denkens-analysiert-vor-dem-hintergrund-der-ki-debatte-in-der-bildung/"
     },
 
@@ -141,28 +141,39 @@ const impulses = [
     }
 ];
 
+
+// Funktion zur Auswahl eines zufälligen Impulses
 function getRandomImpulse() {
     return impulses[Math.floor(Math.random() * impulses.length)];
 }
 
+// Funktion zum Aktualisieren des Impuls-Textes
 function updateImpulse() {
     const impulse = getRandomImpulse();
+    
     const impulseTextElement = document.getElementById("impulseText");
     const readMoreButton = document.getElementById("readMoreButton");
 
-    if (impulseTextElement && readMoreButton) {
-        impulseTextElement.textContent = impulse.text;
-        readMoreButton.onclick = function() {
-            window.location.href = impulse.url;
-        };
+    if (!impulseTextElement || !readMoreButton) {
+        console.error("Fehlende Elemente in HTML: Kann Impulse nicht aktualisieren.");
+        return;
     }
+
+    impulseTextElement.textContent = impulse.text;
+    readMoreButton.onclick = function () {
+        window.location.href = impulse.url;
+    };
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// Sobald die Seite geladen ist, initialisiere die Event Listener
+document.addEventListener("DOMContentLoaded", function () {
     updateImpulse();
 
     const nextImpulseButton = document.getElementById("nextImpulseButton");
     if (nextImpulseButton) {
         nextImpulseButton.addEventListener("click", updateImpulse);
+    } else {
+        console.error("Element mit ID 'nextImpulseButton' wurde nicht gefunden.");
     }
 });
+
