@@ -112,15 +112,18 @@ const impulses = [
         url: "https://ebildungslabor.de/blog/paedagogische-orientierung-im-ki-hype/"
     }
 ];
+let currentImpulseIndex = 0; // Start bei 0
 
-// Funktion zur Auswahl eines zufälligen Impulses
-function getRandomImpulse() {
-    return impulses[Math.floor(Math.random() * impulses.length)];
+// Funktion zur Auswahl des nächsten Impulses in der Reihenfolge
+function getNextImpulse() {
+    const impulse = impulses[currentImpulseIndex];
+    currentImpulseIndex = (currentImpulseIndex + 1) % impulses.length; // Zum Anfang springen, wenn am Ende
+    return impulse;
 }
 
 // Funktion zum Aktualisieren des Impuls-Textes
 function updateImpulse() {
-    const impulse = getRandomImpulse();
+    const impulse = getNextImpulse();
     
     const impulseTextElement = document.getElementById("impulseText");
     const readMoreButton = document.getElementById("readMoreButton");
@@ -138,7 +141,7 @@ function updateImpulse() {
 
 // Sobald die Seite geladen ist, initialisiere die Event Listener
 document.addEventListener("DOMContentLoaded", function () {
-    updateImpulse();
+    updateImpulse(); // Zeigt den ersten Impuls an
 
     const nextImpulseButton = document.getElementById("nextImpulseButton");
     if (nextImpulseButton) {
@@ -147,3 +150,4 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Element mit ID 'nextImpulseButton' wurde nicht gefunden.");
     }
 });
+
